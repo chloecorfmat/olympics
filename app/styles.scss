@@ -1,0 +1,527 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+  h1 {
+    font-weight: 400;
+    text-align: center;
+    padding-top: 2rem;
+    margin: 0;
+
+    strong {
+      font-weight: 700;
+      display: inline;
+    }
+  }
+
+  main {
+    min-height: 100vh;
+    background: white url('/paris-bg.png') bottom;
+    background-size: cover;
+  }
+}
+
+select {
+  appearance: none;
+  border: 0;
+  outline: 0;
+  font: inherit;
+  width: 20rem;
+  padding: 1rem 4rem 1rem 1rem;
+  color: white;
+  border-radius: 0.25em;
+  box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+
+  &::-ms-expand {
+    display: none;
+  }
+
+  option {
+    color: inherit;
+    background-color: white;
+  }
+}
+
+.sr-only {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important;
+}
+
+
+.theme {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.logo{
+  position: relative;
+  margin: 20vh auto;
+
+  .ring{
+    margin: 10rem auto 0;
+    width: 35vh;
+    height: 35vh;
+    border-radius: 50%;
+    border-style: solid;
+    position: initial;
+    box-sizing: border-box;
+  }
+}
+
+.stats {
+  position: relative;
+  text-align: center;
+  top: -9rem;
+
+  .medals {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    padding: 0;
+
+    .medal {
+      list-style-type: none;
+
+      &:before {
+        content: '';
+        width: .7rem;
+        height: .7rem;
+        border-radius: 50%;
+        display: inline-block;
+        margin: auto .5rem;
+      }
+    }
+
+    .gold {
+      &:before {
+        background: gold;
+      }
+    }
+
+    .silver {
+      &:before {
+        background: silver;
+      }
+    }
+
+    .bronze {
+      &:before {
+        background: brown;
+      }
+    }
+  }
+}
+
+.olympic {
+  .logo {
+    .eu {
+      border-color: #0081C8;
+    }
+
+    .as {
+      border-color: #FCB131;
+    }
+
+    .af {
+      border-color: #000000;
+    }
+
+    .oc {
+      border-color:  #00A651;
+    }
+
+    .am {
+      border-color: #EE334E;
+    }
+  }
+
+  .stats {
+    &.eu {
+      h2 {
+        color: #0081C8;
+      }
+    }
+
+    &.as {
+      h2 {
+        color: #FCB131;
+      }
+    }
+
+    &.af {
+      h2 {
+        color: #000000;
+      }
+    }
+
+    &.oc {
+      h2 {
+        color:  #00A651;
+      }
+    }
+
+    &.am {
+      h2 {
+        color: #EE334E;
+      }
+    }
+  }
+
+  select {
+    background: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg) no-repeat right 0.8em center / 1.4em,
+    linear-gradient(to left, #FCB131, #EE334E);
+
+    &:focus,
+    &:hover {
+      outline: 2px solid #000000;
+    }
+  }
+}
+
+.paris2024 {
+  .logo {
+    .eu {
+      border-color: #5C9AD6;
+    }
+
+    .as {
+      border-color: #C1B583;
+    }
+
+    .af {
+      border-color: #1D4C5D;
+    }
+
+    .oc {
+      border-color: #4DB5B2;
+    }
+
+    .am {
+      border-color: #DF9FC7;
+    }
+  }
+
+  .stats {
+    &.eu {
+      h2 {
+        color: #5C9AD6;
+      }
+    }
+
+    &.as {
+      h2 {
+        color: #C1B583;
+      }
+    }
+
+    &.af {
+      h2 {
+        color: #1D4C5D;
+      }
+    }
+
+    &.oc {
+      h2 {
+        color: #4DB5B2;
+      }
+    }
+
+    &.am {
+      h2 {
+        color: #DF9FC7;
+      }
+    }
+  }
+
+  select {
+    background: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg) no-repeat right 0.8em center / 1.4em,
+    linear-gradient(to left, #4DB5B2, #DF9FC7);
+
+    &:focus,
+    &:hover {
+      outline: 2px solid #1D4C5D;
+    }
+  }
+}
+
+.a11y {
+  background: white;
+
+  .logo {
+    position: initial;
+    margin: 5rem auto;
+
+    .ring {
+      border: none;
+      position: initial;
+      width: initial;
+      height: initial;
+      margin-top: 2rem;
+      margin-bottom: 2rem !important;
+
+      &:not(:last-child) {
+        margin-bottom: 5rem;
+      }
+
+      .sr-only {
+        position: initial !important;
+        width: initial !important;
+        height: initial !important;
+        overflow: initial !important;
+        display: inline-block !important;
+        clip-path: none !important;
+      }
+
+      &:hover {
+        animation: none;
+      }
+    }
+
+    .stats {
+      position: initial;
+
+      .medals {
+        display: initial;
+
+        .medal {
+          display: block;
+
+          &::before {
+            content: none;
+          }
+        }
+      }
+    }
+  }
+
+  select {
+    background: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg) no-repeat right 0.8em center / 1.4em,
+    black;
+
+    &:focus,
+    &:hover {
+      outline: 2px solid hotpink;
+    }
+  }
+
+  @media (min-width: 1100px){
+
+  }
+}
+
+.france {
+  .ring {
+    transform: none !important;
+    border-width: 3.375vh !important;
+
+    &.af {
+      border-color: white;
+      background: url("/LM.png");
+    }
+
+    &.oc {
+      border-color: #e62737;
+      background: url("/MAB.png");
+    }
+
+    &.am {
+      border-color: #e62737;
+      background: url("/PFP.png");
+    }
+
+    &.as {
+      border-color: #002391;
+      background: url("/CB.png");
+    }
+
+    &.eu {
+      border-color: #002391;
+      background: url("/TEDDY.png");
+    }
+
+    .stats {
+      display: none;
+    }
+
+  }
+}
+
+
+@media (min-width: 1100px){
+  .theme {
+    margin-top: initial;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 2;
+  }
+
+  .logo {
+    width: 110vh;
+    height: 47vh;
+    transform-style: preserve-3d;
+
+    .ring {
+      margin: initial;
+      position: absolute;
+
+      &.eu {
+        transform: rotateX(-45deg) scaleY(1.4142);
+      }
+
+      &.as{
+        left: 18.6vh;
+        top: 12vh;
+        transform: rotateX(0deg);
+      }
+
+      &.af{
+        left: 37.3vh;
+        transform: rotateX(45deg) scaleY(1.4142);
+      }
+
+      &.oc{
+        top: 12vh;
+        left: 56vh;
+        transform: translateZ(20vh) rotateX(70deg) scaleY(2.9238);
+      }
+
+      &.am{
+        left: 74.6vh;
+        transform: translateZ(-32vh) rotateX(80deg) scaleY(5.7588);
+      }
+    }
+  }
+
+  .stats {
+    position: relative;
+    &.eu,
+    &.af,
+    &.am {
+      top: -10rem;
+    }
+
+    &.as,
+    &.oc {
+      bottom: -18rem;
+      top: initial;
+    }
+  }
+
+
+  // Animation.
+  .logo {
+    opacity: 1;
+
+    .ring {
+      opacity: 0;
+
+      &.af {
+        animation: animateAf .5s 0s forwards;
+      }
+
+      &.oc {
+        animation: animateOc .5s .1s forwards;
+      }
+
+      &.am {
+        animation: animateAm .5s .2s forwards;
+      }
+
+      &.as {
+        animation: animateAs .5s .3s forwards;
+      }
+
+      &.eu {
+        animation: animateEu .5s .4s forwards;
+      }
+    }
+
+    .stats {
+      opacity: 0;
+      animation: animateStats 1s .7s forwards;
+    }
+  }
+
+  @keyframes animateStats {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes animateAf {
+    from {
+      transform: translateY(50%);
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+      transform: rotateX(45deg) scaleY(1.4142) translateY(0);
+    }
+  }
+  @keyframes animateEu {
+    from {
+      transform: translateY(50%);
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+      transform: rotateX(-45deg) scaleY(1.4142) translateY(0);
+    }
+  }
+  @keyframes animateAs {
+    from {
+      transform: translateY(50%);
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+      transform: rotateX(0deg) translateY(0);
+    }
+  }
+  @keyframes animateAm {
+    from {
+      transform: translateY(50%);
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+      transform: translateZ(-32vh) rotateX(80deg) scaleY(5.7588) translateY(0);
+    }
+  }
+  @keyframes animateOc {
+    from {
+      transform: translateY(50%);
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+      transform: translateZ(20vh) rotateX(70deg) scaleY(2.9238) translateY(0);
+    }
+  }
+}
+
+.explosion {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  transform: translateX(50%);
+  z-index: 1000;
+}
