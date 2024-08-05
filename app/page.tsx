@@ -1,6 +1,7 @@
 'use client';
 
-import {useState, useEffect, useCallback, useRef, ChangeEvent} from "react";
+import {useState, useEffect, useRef, ChangeEvent} from "react";
+import ReactDOM from 'react-dom'
 import Konami from 'react-konami-code';
 import '@/app/styles.scss';
 import ConfettiExplosion from 'confetti-explosion-react';
@@ -35,6 +36,11 @@ export default function Home() {
 	const [isExploding, setIsExploding] = useState(false);
 	const [height, setHeight] = useState(0);
 	const [width, setWidth] = useState(0);
+	const [title, setTitle] = useState('Médailles olympiques par continent à Paris 2024');
+	const [franceMedals, setFranceMedals] = useState('44');
+	const [soundUrl, setSoundUrl] = useState('');
+
+	const audioElement = useRef<HTMLAudioElement>(null);
 
 	const continents : ContinentsMap = {
 		'EU': 'Europe',
@@ -76,22 +82,44 @@ export default function Home() {
 				const result = await response.json();
 				setData(result);
 			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		const fetchFranceMedals = async () => {
+			try {
+				const response = await fetch('https://olympics.lucas-trebouet.fr/medals/continents/countries');
+				if (!response.ok) {
+					throw new Error('Network response was not ok');
+				}
+				const result = await response.json();
+				setFranceMedals(result.EU.FRA.total);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		const fetchSoundUrl = async () => {
+			try {
+				const response = await fetch('https://olympics.lucas-trebouet.fr/sounds/france');
+				if (!response.ok) {
+					throw new Error('Network response was not ok');
+				}
+				const result = await response.json();
+				setSoundUrl(result.preview);
+			} catch (error) {
+				console.log(error);
 			}
 		};
 
 		setHeight(window.innerHeight);
 		setWidth(window.innerWidth);
 		fetchData();
-
+		fetchFranceMedals();
+		fetchSoundUrl();
 	}, []);
 
 	async function changeTheme(e:ChangeEvent<HTMLSelectElement>) {
-		// If konami is working.
-		setIsExploding(false);
-
-		const audio = document.getElementById('audio') as HTMLAudioElement;
-		audio.pause();
-
 		const target = e.target as HTMLSelectElement;
 		if (target) {
 			setTheme(target.value);
@@ -99,6 +127,7 @@ export default function Home() {
 			if (target.value == 'paris2024' || target.value == 'olympic') {
 				Object.entries(data).map(([continent, medals]) => {
 
+					//@TODO : Find a better way to redraw page and replay CSS animation.
 					try {
 						let elm = document.getElementById(continent) as HTMLElement;
 						let newone = elm.cloneNode(true);
@@ -113,25 +142,39 @@ export default function Home() {
 				});
 			}
 		}
-
 	}
 
 	const easterEgg = () => {
 		if (theme == 'paris2024') {
+			// Confettis.
 			setIsExploding(true);
-			const audio = document.getElementById('audio') as HTMLAudioElement;
-			audio.play();
+
+			// Play sound.
+			if (audioElement.current) {
+				audioElement.current.src = soundUrl;
+				audioElement.current?.play();
+			}
 			setTheme('paris2024 france');
+			setTitle(franceMedals + ' médailles françaises ! 🇫🇷');
 		}
 	}
 
 	const medalsData = data as MedalsMap;
 
-  return (
+	ReactDOM.preload('/LM.png', { as: 'image' });
+	ReactDOM.preload('/TEDDY.png', { as: 'image' });
+	ReactDOM.preload('/CB.png', { as: 'image' });
+	ReactDOM.preload('/PFP.png', { as: 'image' });
+	ReactDOM.preload('/MAB.png', { as: 'image' });
+
+	return (
     <main className={theme} id="main">
-			<Konami action={easterEgg}>
-				<audio id="audio">
-					<source src="/marseillaise.mp3" type="audio/mpeg" />
+			<Konami
+				action={easterEgg}
+				code={[76, 69, 79, 78]}
+				resetDelay={0}
+			>
+				<audio id="audio" ref={audioElement}>
 				</audio>
 			</Konami>
 
@@ -154,7 +197,7 @@ export default function Home() {
 				}
 			</div>
 
-			<h1>Médailles olympiques par continent à Paris 2024</h1>
+			<h1>{title}</h1>
 
 			<div className="theme">
 				<label htmlFor="theme" className="sr-only">Choisir un thème</label>

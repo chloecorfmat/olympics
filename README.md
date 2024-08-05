@@ -1,21 +1,20 @@
-# Benjamin Code x Olympic Games
+# Benjamin Code x Jeux Olympiques (par Chloé Corfmat)
+**Démo :** https://olympics-sooty.vercel.app/
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Fonctionnalités
+* Utilisation d'une **API** créée par Luuka : https://github.com/Luuka/olympics-paris-api
+* **3 thèmes** différents :
+    * Paris 2024 : thème réutilisant l'identité visuelle de Paris 2024
+    * Olympique : thème avec les couleurs par défaut des anneaux olympiques
+    * Accessible : texte brut, idéal pour les personnes en situation de handicap (et/ou utilisant un dispositif d'assistance)
+* **Easter Egg** : sur le thème "Paris 2024", taper "leon" (et monter le son) !
 
-## Getting Started
-
-First, run the project:
+## Technologie
+**Technologies utilisées** : Next.js, Sass
 
 ```bash
 git clone https://github.com/chloecorfmat/olympics.git
 npm install
 npm run build
+npm run start
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

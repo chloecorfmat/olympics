@@ -3,10 +3,10 @@
 }
 
 body {
-
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  background: white;
 
   h1 {
     font-weight: 400;
@@ -22,33 +22,13 @@ body {
 
   main {
     min-height: 100vh;
+    height: 100%;
     background: white url('/paris-bg.png') bottom;
     background-size: cover;
   }
 }
 
-select {
-  appearance: none;
-  border: 0;
-  outline: 0;
-  font: inherit;
-  width: 20rem;
-  padding: 1rem 4rem 1rem 1rem;
-  color: white;
-  border-radius: 0.25em;
-  box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-
-  &::-ms-expand {
-    display: none;
-  }
-
-  option {
-    color: inherit;
-    background-color: white;
-  }
-}
-
+// Screen reader only.
 .sr-only {
   border: 0 !important;
   clip: rect(1px, 1px, 1px, 1px) !important;
@@ -62,15 +42,38 @@ select {
   white-space: nowrap !important;
 }
 
-
+// Theme select.
 .theme {
   margin-top: 4rem;
   text-align: center;
+
+  select {
+    appearance: none;
+    border: 0;
+    outline: 0;
+    font: inherit;
+    width: 20rem;
+    padding: 1rem 4rem 1rem 1rem;
+    color: white;
+    border-radius: 0.25em;
+    box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+
+    &::-ms-expand {
+      display: none;
+    }
+
+    option {
+      color: inherit;
+      background-color: white;
+    }
+  }
 }
 
 .logo{
   position: relative;
-  margin: 20vh auto;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
 
   .ring{
     margin: 10rem auto 0;
@@ -83,6 +86,7 @@ select {
   }
 }
 
+// Statistics.
 .stats {
   position: relative;
   text-align: center;
@@ -127,6 +131,7 @@ select {
   }
 }
 
+// Olympic Games theme.
 .olympic {
   .logo {
     .eu {
@@ -193,6 +198,7 @@ select {
   }
 }
 
+// Paris 2024 theme.
 .paris2024 {
   .logo {
     .eu {
@@ -259,12 +265,13 @@ select {
   }
 }
 
+// Fully accessible theme.
 .a11y {
   background: white;
 
   .logo {
     position: initial;
-    margin: 5rem auto;
+    margin: 0 auto;
 
     .ring {
       border: none;
@@ -318,12 +325,9 @@ select {
       outline: 2px solid hotpink;
     }
   }
-
-  @media (min-width: 1100px){
-
-  }
 }
 
+// Easter egg (= France theme).
 .france {
   .ring {
     transform: none !important;
@@ -357,24 +361,30 @@ select {
     .stats {
       display: none;
     }
+  }
 
+  select {
+    display: none;
   }
 }
 
 
 @media (min-width: 1100px){
+  // Theme select on desktop.
   .theme {
     margin-top: initial;
     position: fixed;
     bottom: 2rem;
     right: 2rem;
-    z-index: 2;
+    z-index: 10000;
   }
 
+  // Positioning elements on desktop.
   .logo {
     width: 110vh;
     height: 47vh;
     transform-style: preserve-3d;
+    margin: 20vh auto;
 
     .ring {
       margin: initial;
@@ -424,100 +434,105 @@ select {
   }
 
 
-  // Animation.
-  .logo {
-    opacity: 1;
+  // Animate logo on changing theme and loading page.
+  .paris2024,
+  .olympic {
+    // Animation.
+    .logo {
+      opacity: 1;
 
-    .ring {
-      opacity: 0;
+      .ring {
+        opacity: 0;
 
-      &.af {
-        animation: animateAf .5s 0s forwards;
+        &.af {
+          animation: animateAf .5s 0s forwards;
+        }
+
+        &.oc {
+          animation: animateOc .5s .1s forwards;
+        }
+
+        &.am {
+          animation: animateAm .5s .2s forwards;
+        }
+
+        &.as {
+          animation: animateAs .5s .3s forwards;
+        }
+
+        &.eu {
+          animation: animateEu .5s .4s forwards;
+        }
       }
 
-      &.oc {
-        animation: animateOc .5s .1s forwards;
-      }
-
-      &.am {
-        animation: animateAm .5s .2s forwards;
-      }
-
-      &.as {
-        animation: animateAs .5s .3s forwards;
-      }
-
-      &.eu {
-        animation: animateEu .5s .4s forwards;
+      .stats {
+        opacity: 0;
+        animation: animateStats 1s .7s forwards;
       }
     }
 
-    .stats {
-      opacity: 0;
-      animation: animateStats 1s .7s forwards;
+    @keyframes animateStats {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
-  }
-
-  @keyframes animateStats {
-    from {
-      opacity: 0;
+    @keyframes animateAf {
+      from {
+        transform: translateY(50%);
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+        transform: rotateX(45deg) scaleY(1.4142) translateY(0);
+      }
     }
-    to {
-      opacity: 1;
+    @keyframes animateEu {
+      from {
+        transform: translateY(50%);
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+        transform: rotateX(-45deg) scaleY(1.4142) translateY(0);
+      }
     }
-  }
-  @keyframes animateAf {
-    from {
-      transform: translateY(50%);
-      opacity: 0;
+    @keyframes animateAs {
+      from {
+        transform: translateY(50%);
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+        transform: rotateX(0deg) translateY(0);
+      }
     }
-    to {
-      opacity: 1;
-      transform: rotateX(45deg) scaleY(1.4142) translateY(0);
+    @keyframes animateAm {
+      from {
+        transform: translateY(50%);
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+        transform: translateZ(-32vh) rotateX(80deg) scaleY(5.7588) translateY(0);
+      }
     }
-  }
-  @keyframes animateEu {
-    from {
-      transform: translateY(50%);
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-      transform: rotateX(-45deg) scaleY(1.4142) translateY(0);
-    }
-  }
-  @keyframes animateAs {
-    from {
-      transform: translateY(50%);
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-      transform: rotateX(0deg) translateY(0);
-    }
-  }
-  @keyframes animateAm {
-    from {
-      transform: translateY(50%);
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-      transform: translateZ(-32vh) rotateX(80deg) scaleY(5.7588) translateY(0);
-    }
-  }
-  @keyframes animateOc {
-    from {
-      transform: translateY(50%);
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-      transform: translateZ(20vh) rotateX(70deg) scaleY(2.9238) translateY(0);
+    @keyframes animateOc {
+      from {
+        transform: translateY(50%);
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+        transform: translateZ(20vh) rotateX(70deg) scaleY(2.9238) translateY(0);
+      }
     }
   }
 }
 
+// Confettis.
 .explosion {
   position: fixed;
   width: 100vw;
