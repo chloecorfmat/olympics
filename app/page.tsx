@@ -1,26 +1,49 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import {useState, useEffect, useCallback, useRef, ChangeEvent} from "react";
 import Konami from 'react-konami-code';
 import '@/app/styles.scss';
 import ConfettiExplosion from 'confetti-explosion-react';
+
+interface Medal {
+	gold: number;
+	silver: number;
+	bronze: number;
+	total: number;
+}
+
+type MedalsMap = {
+	[key: string]: Medal;
+};
+
+interface Position {
+	position: string;
+	sign: string;
+}
+
+type PositionsMap = {
+	[key: string]: Position;
+}
+
+type ContinentsMap = {
+	[key: string]: string;
+}
 
 export default function Home() {
 	const [theme, setTheme] = useState('paris2024');
 	const [data, setData] = useState({})
 	const [isExploding, setIsExploding] = useState(false);
+	const [height, setHeight] = useState(0);
+	const [width, setWidth] = useState(0);
 
-	const height= window.innerHeight;
-	const width= window.innerWidth;
-
-	const continents = {
+	const continents : ContinentsMap = {
 		'EU': 'Europe',
 		'AS': 'Asie',
 		'AF': 'Afrique',
 		'AM': 'Amérique',
 		'OC': 'Océanie'
 	}
-	const position = {
+	const position : PositionsMap = {
 		'EU': {
 			'position': 'top',
 			'sign': '-'
@@ -52,43 +75,57 @@ export default function Home() {
 				}
 				const result = await response.json();
 				setData(result);
-
 			} catch (error) {
 			}
 		};
 
+		setHeight(window.innerHeight);
+		setWidth(window.innerWidth);
 		fetchData();
+
 	}, []);
 
-	async function changeTheme(e) {
+	async function changeTheme(e:ChangeEvent<HTMLSelectElement>) {
 		// If konami is working.
 		setIsExploding(false);
 
-		document.getElementById('audio').pause();
+		const audio = document.getElementById('audio') as HTMLAudioElement;
+		audio.pause();
 
-		setTheme(e.target.value);
+		const target = e.target as HTMLSelectElement;
+		if (target) {
+			setTheme(target.value);
 
-		if (e.target.value == 'paris2024' || e.target.value == 'olympic') {
-			Object.entries(data).map(([continent, medals]) => {
+			if (target.value == 'paris2024' || target.value == 'olympic') {
+				Object.entries(data).map(([continent, medals]) => {
 
-				try {
-					let elm = document.getElementById(continent);
-					let newone = elm.cloneNode(true);
-					elm.parentNode.replaceChild(newone, elm);
-				} catch (e) {
-					console.log(e);
-				}
-			});
+					try {
+						let elm = document.getElementById(continent) as HTMLElement;
+						let newone = elm.cloneNode(true);
+
+						if (elm && elm.parentNode) {
+							elm.parentNode.replaceChild(newone, elm);
+						}
+
+					} catch (e) {
+						console.log(e);
+					}
+				});
+			}
 		}
+
 	}
 
 	const easterEgg = () => {
 		if (theme == 'paris2024') {
 			setIsExploding(true);
-			document.getElementById('audio').play();
+			const audio = document.getElementById('audio') as HTMLAudioElement;
+			audio.play();
 			setTheme('paris2024 france');
 		}
 	}
+
+	const medalsData = data as MedalsMap;
 
   return (
     <main className={theme} id="main">
@@ -129,7 +166,7 @@ export default function Home() {
 			</div>
 
 			<div className="logo">
-				{data && Object.entries(data).map(([continent, medals]) => (
+				{data && Object.entries(medalsData).map(([continent, medals]) => (
 						<div
 							key={continent}
 							className={"ring " + continent.toLowerCase()}
