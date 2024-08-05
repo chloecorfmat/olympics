@@ -63,6 +63,7 @@ export default function Home() {
 	async function changeTheme(e) {
 		// If konami is working.
 		setIsExploding(false);
+
 		document.getElementById('audio').pause();
 
 		setTheme(e.target.value);
@@ -79,8 +80,6 @@ export default function Home() {
 				}
 			});
 		}
-
-
 	}
 
 	const easterEgg = () => {
@@ -147,8 +146,8 @@ export default function Home() {
 							>
 								<h2>{ continents[continent] } : <strong>{ medals.total }<span className="sr-only">&nbsp; médailles</span></strong></h2>
 								<ul className="medals">
-									<li className="medal gold">{ medals.gold }<span className="sr-only">&nbsp;médailles d'or</span></li>
-									<li className="medal silver">{ medals.silver }<span className="sr-only">&nbsp;médailles d'argent</span></li>
+									<li className="medal gold">{ medals.gold }<span className="sr-only">&nbsp;médailles d&apos;or</span></li>
+									<li className="medal silver">{ medals.silver }<span className="sr-only">&nbsp;médailles d&apos;argent</span></li>
 									<li className="medal bronze">{ medals.bronze }<span className="sr-only">&nbsp;médailles de bronze</span></li>
 								</ul>
 							</div>
